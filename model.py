@@ -20,8 +20,19 @@ def connect_to_db(app, db_uri="postgresql:///games"):
 
 def example_data():
     """Create example data for the test database."""
-    # FIXME: write a function that creates a game and adds it to the database.
-    print("FIXME")
+    
+    # Empty out existing data
+    Game.query.delete()
+    
+    # Add sample games- name, description
+    mario_bros = Game(name="Super Mario Bros.", description="A Classic Nintendo Game")
+    sudoku = Game(name="Sudoku", description="A Japanese number game")
+    hide_and_seek = Game(name="Hide and Seek", description="Don't play this at night")
+    
+    # Add sample data to the database
+    db.session.add_all([mario_bros, sudoku, hide_and_seek])
+    db.session.commit()
+    
 
 
 if __name__ == '__main__':

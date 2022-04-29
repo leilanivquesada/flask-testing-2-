@@ -30,6 +30,11 @@ def rsvp():
 
 @app.route("/games")
 def games():
+    
+    if 'RSVP' not in session:
+        flash("You need to RSVP first, foo")
+        return redirect("/")
+
     games = Game.query.all()
     return render_template("games.html", games=games)
 
